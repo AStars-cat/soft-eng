@@ -1,0 +1,64 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-5.3.0/css/bootstrap.css' %}">
+    <style>
+        .account {
+            width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #ccc;
+
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            padding: 20px 40px;
+        }
+
+        .account h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="account">
+    <h2>用户登陆</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>用户名</label>
+            {{ form.name }}
+            <span style="color: #842029">{{ form.name.errors.0 }}</span>
+
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            {{ form.password }}
+            <span>{{ form.password.errors.0 }}</span>
+
+             <div class="form-group">
+            <label for="id_code">图片验证码</label>
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    {{ form.code }}
+                    <span>{{ form.code.errors.0 }}</span>
+                </div>
+                <div class="ml-3">
+                    <img id="image_code" src="/image/code/" alt="验证码" style="width: 125px">
+                </div>
+            </div>
+        </div>
+
+            <input type="submit" value="登录" class="btn btn-primary mt-2">
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

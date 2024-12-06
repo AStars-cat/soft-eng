@@ -1,0 +1,308 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div>
+        <div class="container mt-5">
+
+            <div>
+                <div class="card" >
+                    <div class="d-flex justify-content-between align-items-center" style="padding: 10px;">
+                        <div style="width: 200px">
+                            <h2 class="mt-2 " style="margin-left: 10px;">员工管理</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+                        <a href="#" id="btnAdd" class="btn btn-primary">添加员工</a>
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">姓名</th>
+                                <th scope="col">性别</th>
+                                <th scope="col">邮箱</th>
+                                <th scope="col">部门</th>
+                                <th scope="col">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in queryset %}
+
+                                <tr>
+
+                                    <th scope="row">{{ item.id }}</th>
+                                    <td> {{ item.name }}</td>
+                                    <td> {{ item.get_gender_display }}</td>
+                                    <td> {{ item.email }}</td>
+                                    <td> {{ item.department }}</td>
+
+
+                                    <td>
+                                        <input uid = "{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit" href="" value="编辑">
+                                        <input uid = "{{ item.id }}" type="button" class="btn btn-danger btn-xs btn-delete" href="" value="删除">
+
+
+                                    </td>
+
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                    <ul class="pagination mt-2">
+                        {{ page_string }}
+                    </ul>
+                </div>
+            </div>
+
+
+            {#            模态框#}
+            <div class="modal fade" id="myModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">添加员工</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form id="formAdd">
+                                <div class="row">
+                                    {% for field in form %}
+                                        <div class="col-xs-6 col-md-6">
+                                            <div class="form-group " style="position: relative">
+                                                <label>{{ field.label }}:</label>
+                                                {{ field }}
+                                                <span class="error-msg"
+                                                      style="color: red;position: absolute">{{ field.errors.0 }}</span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取 消</button>
+                            <button id="btnSave" type="button" class="btn btn-primary">保 存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="alert alert-danger" role="alert">
+                    <h3> A simple danger alert—check it out!</h3>
+
+                    <p style="text-align: right">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取 消</button>
+                        <button id='btnConfirmDelete' type="button" class="btn btn-primary">保 存</button>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block js %}
+
+    <script>
+
+        var DELETE_ID;
+        var EDIT_ID;
+
+
+        $(function () {
+            bindBtnAddEvent();
+            bindBtnSaveEvent();
+            bindBtnDeleteEvent();
+            bindBtnConfirmDeleteEvent();
+            bindBtnEditEvent();
+
+        })
+
+        function bindBtnAddEvent() {
+            $('#btnAdd').click(function () {
+
+                EDIT_ID = null;
+                //清空表单
+                $('#formAdd')[0].reset();
+
+
+                $('#myModel').modal('show');
+            })
+        }
+
+        function bindBtnSaveEvent() {
+            $("#btnSave").click(function () {
+
+                //清除错误信息
+                $(".error-msg").empty();
+
+                if (EDIT_ID) {
+                    //编辑
+                    doEdit();
+
+                } else {
+                    //新建
+                    doAdd();
+                }
+
+
+            });
+        }
+
+        function doAdd() {
+            $.ajax({
+                url: '/employee/add/',
+                type: 'post',
+                data: $("#formAdd").serialize(),
+                dataType: 'JSON',
+                success: function (res) {
+                    if (res.status) {
+                        alert('添加成功');
+                        //清空表单
+                        $('#formAdd')[0].reset();
+                        //关闭对话框
+                        $('#myModel').modal('hide');
+                        //刷新页面
+                        location.reload();
+
+                    } else {
+                        $.each(res.error, function (name, erroList) {
+                            $("#id_" + name).next().text(erroList[0]);
+                        })
+                    }
+                }
+            })
+        }
+
+        function doEdit(){
+                 $.ajax({
+                    url: '/employee/edit/?uid=' + EDIT_ID,
+                    type: 'post',
+                    data: $("#formAdd").serialize(),
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status) {
+                            alert('提交成功');
+                            //清空表单
+                            //$("#formAdd")是jQuery对象， -> $("#formAdd")[0]是原生DOM对象
+                            $("#formAdd")[0].reset();
+                            //关闭对话框
+                            $('#myModal').modal('hide');
+                            //刷新页面
+                            location.reload();
+
+                        } else {
+                            if(data.tips){
+                                alert(data.tips);
+                            }
+                            //显示错误信息
+                            $.each(data.error, function (name, erroList) {
+                                $("#id_" + name).next().html(erroList[0]);
+                            })
+                        }
+
+                        console.log(data);
+
+                        {#//提交成功后，关闭对话框#}
+                        {#$('#myModal').modal('hide');#}
+                        {#//刷新页面#}
+                        {#location.reload();#}
+                    }
+                })
+        }
+
+            function bindBtnDeleteEvent() {
+            //给删除按钮绑定事件
+            $(".btn-delete").click(function () {
+                //显示删除对话框
+                $('#deleteModal').modal('show');
+
+                //获取要删除的ID赋值给全局变量
+                DELETE_ID = DELETE_ID = $(this).attr("uid");
+
+
+            });
+        }
+
+        function bindBtnConfirmDeleteEvent() {
+            //给确认删除按钮绑定事件
+            $("#btnConfirmDelete").click(function () {
+                console.log("测试")
+                //点击确认删除按钮后，提交删除请求
+                $.ajax({
+                    url: '/employee/delete/',
+                    type: 'GET',
+                    data: {uid: DELETE_ID},
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status) {
+                            alert('删除成功');
+                            //关闭对话框
+                            $('#deleteModal').modal('hide');
+                            //删除页面中的数据
+                            $("tr[uid=" + DELETE_ID + "]").remove();
+                        } else {
+                            alert('删除失败');
+                        }
+                    }
+                })
+            });
+        }
+
+         function bindBtnEditEvent() {
+            $(".btn-edit").click(function () {
+                //清空表单
+                $("#formAdd")[0].reset();
+                EDIT_ID = $(this).attr("uid");
+
+
+                //发送ajax去后台获取当前行数据
+                $.ajax({
+                    url: '/employee/detail/',
+                    type: 'GET',
+                    data: {uid: $(this).attr("uid")},
+                    dataType: 'JSON',
+                    success: function (data) {
+                        //将数据赋值到标签
+                        $.each(data.data, function (name, value) {
+                            $("#id_" + name).val(value);
+                        })
+
+
+                        //修改对话框的标题
+                        $("#myModalLabel").text("修改管理员信息");
+
+                        //点击编辑显示模态框
+                        $('#myModel').modal('show');
+                    }
+                })
+
+                //在对话框显示
+
+            });
+        }
+
+    </script>
+
+{% endblock %}

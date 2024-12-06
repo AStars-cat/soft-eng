@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-9cl2=txj9hz6=2c0$1-pe82d@va$4mqus4k07-kmzqkw^pe59w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.31.53',
+    'localhost',
+]
 
 
 # Application definition
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'web01.middleware.auth.M1',
 ]
 
 ROOT_URLCONF = 'CRM.urls'

@@ -4,20 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20e1b08f-1006-4a87-860f-4379521f157a" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CRM.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CRM/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CRM/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CRM/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CRM/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CRM/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/__init__.py" afterDir="false" />
+    <list default="true" id="20e1b08f-1006-4a87-860f-4379521f157a" name="更改" comment="inti">
+      <change afterPath="$PROJECT_DIR$/web01/middleware/auth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/migrations/0002_admin_company_department_product_remove_customer_age_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/migrations/0003_alter_lead_assigned_to_alter_product_description.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/migrations/0004_remove_customer_leads_customer_company_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/migrations/0005_alter_customer_gender.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/migrations/0006_order_admin_alter_customer_gender.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/static/img/icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/static/img/person-circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/static/plugins/jquery/jquery-3.7.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/aa.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/admin_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/change.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/customer_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/depart_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/employee_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/order_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/templates/product_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/utils/code.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/utils/encrypt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/utils/pagination.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/views/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/views/bas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/views/cus.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web01/views/sale.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRM/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRM/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRM/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web01/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web01/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web01/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/views/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +46,14 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -34,25 +61,53 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2pOKQqKTuHre5T1lkus6b8itmmu" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Django 服务器.CRM.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/CODES/Web/CRM/web01/middleware",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.externalTools",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CODES\Web\CRM\web01\middleware" />
+      <recent name="D:\CODES\Web\CRM\web01\templates" />
+      <recent name="D:\CODES\Web\CRM\web01\utils" />
+      <recent name="D:\CODES\Web\CRM\web01\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CODES\Web\CRM\web01\views" />
+      <recent name="D:\CODES\Web\CRM\web01\static\img" />
+      <recent name="D:\CODES\Web\CRM\web01\static\plugins" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="CRM" type="Python.DjangoServer" factoryName="Django server">
       <module name="CRM" />
@@ -97,10 +152,41 @@
       <option name="presentableId" value="Default" />
       <updated>1732631668692</updated>
       <workItem from="1732631670066" duration="524000" />
+      <workItem from="1732632212260" duration="6830000" />
+      <workItem from="1733210235826" duration="41290000" />
     </task>
+    <task id="LOCAL-00001" summary="inti">
+      <option name="closed" value="true" />
+      <created>1732632458743</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732632458743</updated>
+    </task>
+    <task id="LOCAL-00002" summary="inti">
+      <option name="closed" value="true" />
+      <created>1732632575023</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732632575023</updated>
+    </task>
+    <task id="LOCAL-00003" summary="inti">
+      <option name="closed" value="true" />
+      <created>1732634647980</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732634647980</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="inti" />
+    <option name="LAST_COMMIT_MESSAGE" value="inti" />
   </component>
 </project>
