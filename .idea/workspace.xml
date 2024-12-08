@@ -4,40 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20e1b08f-1006-4a87-860f-4379521f157a" name="更改" comment="inti">
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0007_alter_order_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0008_alter_order_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0009_order_paid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0010_customer_email_customer_phone_alter_company_email.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0011_customer_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0012_customer_created_at.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0013_remove_followuprecord_lead_followuprecord_customer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0014_admin_department_admin_email_admin_gender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0015_alter_admin_department.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/migrations/0016_alter_admin_department.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/static/img/coin.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/templates/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/templates/company_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/templates/follow_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/templates/lead_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/templates/my_customer_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/templates/order_receivable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web01/views/leads.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CRM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRM/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/admin_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/admin_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/customer_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/customer_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/depart_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/depart_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/employee_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/employee_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/order_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/order_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/templates/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/web01/templates/product_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/views/bas.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/views/bas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/views/cus.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/views/cus.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/views/sale.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/views/sale.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web01/views/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web01/views/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="20e1b08f-1006-4a87-860f-4379521f157a" name="更改" comment="complete01" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +122,7 @@
       <workItem from="1732632212260" duration="6830000" />
       <workItem from="1733210235826" duration="41290000" />
       <workItem from="1733494150552" duration="3764000" />
-      <workItem from="1733641529907" duration="18607000" />
+      <workItem from="1733641529907" duration="19388000" />
     </task>
     <task id="LOCAL-00001" summary="inti">
       <option name="closed" value="true" />
@@ -205,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733494916356</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="complete01">
+      <option name="closed" value="true" />
+      <created>1733663005949</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733663005949</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +188,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inti" />
-    <option name="LAST_COMMIT_MESSAGE" value="inti" />
+    <MESSAGE value="complete01" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete01" />
   </component>
 </project>
