@@ -6,42 +6,47 @@
         <div class="container mt-5">
 
             <div>
-                <div class="card" >
+                <div class="card">
                     <div class="d-flex justify-content-between align-items-center" style="padding: 10px;">
                         <div style="width: 200px">
-                            <h2 class="mt-2 " style="margin-left: 10px;">产品列表</h2>
+                            <h2 class="mt-2 " style="margin-left: 10px;">线索列表</h2>
                         </div>
 
                     </div>
 
                     <div class="card-body">
-                        <a href="#" id="btnAdd" class="btn btn-primary">添加产品</a>
+                        <a href="#" id="btnAdd" class="btn btn-primary">新增线索</a>
                         <table class="table table-bordered mt-3">
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">产品名称</th>
-                                <th scope="col">数量</th>
-                                <th scope="col">描述</th>
-                                <th scope="col">价格</th>
+                                <th scope="col">姓名</th>
+                                <th scope="col">性别</th>
+                                <th scope="col">电话</th>
+                                <th scope="col">邮箱</th>
+                                <th scope="col">公司</th>
+                                <th scope="col">创建时间</th>
                                 <th scope="col">操作</th>
+
                             </tr>
                             </thead>
                             <tbody>
                             {% for item in queryset %}
 
-                                <tr uid = {{ item.id }}>
+                                <tr uid ={{ item.id }}>
 
-                                    <th scope="row">{{ item.id }}</th>
-                                    <td> {{ item.name }}</td>
-                                    <td> {{ item.count }}</td>
-                                    <td> {{ item.description }}</td>
-                                    <td> {{ item.price }}</td>
+                                    <th scope="row">{{ item.name }}</th>
+                                    <td> {{ item.get_gender_display }}</td>
+                                    <td> {{ item.phone }}</td>
+                                    <td> {{ item.email }}</td>
+                                    <td> {{ item.company }}</td>
+                                    <td> {{ item.created_at }}</td>
 
 
                                     <td>
-                                        <input uid = "{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit" href="" value="编辑">
-                                        <input uid = "{{ item.id }}" type="button" class="btn btn-danger btn-xs btn-delete" href="" value="删除">
+                                        <input uid="{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit"
+                                               href="" value="分配">
+                                        <input uid="{{ item.id }}" type="button"
+                                               class="btn btn-danger btn-xs btn-delete" href="" value="删除">
 
 
                                     </td>
@@ -68,7 +73,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">添加产品</h5>
+                            <h5 class="modal-title" id="myModalLabel">新增线索</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -98,6 +103,43 @@
         </div>
 
     </div>
+
+
+    <div class="modal fade" id="deliModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">分配线索</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="formDeli">
+                        <div class="row">
+                            {% for field in form_p %}
+                                <div class="col-xs-6 col-md-6">
+                                    <div class="form-group " style="position: relative">
+                                        <label>{{ field.label }}:</label>
+                                        {{ field }}
+                                        <span class="error-msg"
+                                              style="color: red;position: absolute">{{ field.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取 消</button>
+                    <button id="DeliSave" type="button" class="btn btn-primary">保 存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 
 
@@ -136,6 +178,7 @@
             bindBtnDeleteEvent();
             bindBtnConfirmDeleteEvent();
             bindBtnEditEvent();
+            bindBtnDeliSaveEvent();
 
         })
 
@@ -172,7 +215,7 @@
 
         function doAdd() {
             $.ajax({
-                url: '/product/add/',
+                url: '/lead/add/',
                 type: 'post',
                 data: $("#formAdd").serialize(),
                 dataType: 'JSON',
@@ -195,44 +238,44 @@
             })
         }
 
-        function doEdit(){
-                 $.ajax({
-                    url: '/product/edit/?uid=' + EDIT_ID,
-                    type: 'post',
-                    data: $("#formAdd").serialize(),
-                    dataType: 'JSON',
-                    success: function (data) {
-                        if (data.status) {
-                            alert('提交成功');
-                            //清空表单
-                            //$("#formAdd")是jQuery对象， -> $("#formAdd")[0]是原生DOM对象
-                            $("#formAdd")[0].reset();
-                            //关闭对话框
-                            $('#myModal').modal('hide');
-                            //刷新页面
-                            location.reload();
+        function doEdit() {
+            $.ajax({
+                url: '/company/edit/?uid=' + EDIT_ID,
+                type: 'post',
+                data: $("#formAdd").serialize(),
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status) {
+                        alert('提交成功');
+                        //清空表单
+                        //$("#formAdd")是jQuery对象， -> $("#formAdd")[0]是原生DOM对象
+                        $("#formAdd")[0].reset();
+                        //关闭对话框
+                        $('#myModal').modal('hide');
+                        //刷新页面
+                        location.reload();
 
-                        } else {
-                            if(data.tips){
-                                alert(data.tips);
-                            }
-                            //显示错误信息
-                            $.each(data.error, function (name, erroList) {
-                                $("#id_" + name).next().html(erroList[0]);
-                            })
+                    } else {
+                        if (data.tips) {
+                            alert(data.tips);
                         }
-
-                        console.log(data);
-
-                        {#//提交成功后，关闭对话框#}
-                        {#$('#myModal').modal('hide');#}
-                        {#//刷新页面#}
-                        {#location.reload();#}
+                        //显示错误信息
+                        $.each(data.error, function (name, erroList) {
+                            $("#id_" + name).next().html(erroList[0]);
+                        })
                     }
-                })
+
+                    console.log(data);
+
+                    {#//提交成功后，关闭对话框#}
+                    {#$('#myModal').modal('hide');#}
+                    {#//刷新页面#}
+                    {#location.reload();#}
+                }
+            })
         }
 
-            function bindBtnDeleteEvent() {
+        function bindBtnDeleteEvent() {
             //给删除按钮绑定事件
             $(".btn-delete").click(function () {
                 //显示删除对话框
@@ -251,7 +294,7 @@
                 console.log("测试")
                 //点击确认删除按钮后，提交删除请求
                 $.ajax({
-                    url: '/product/delete/',
+                    url: '/company/delete/',
                     type: 'GET',
                     data: {uid: DELETE_ID},
                     dataType: 'JSON',
@@ -270,7 +313,7 @@
             });
         }
 
-         function bindBtnEditEvent() {
+        function bindBtnEditEvent() {
             $(".btn-edit").click(function () {
                 //清空表单
                 $("#formAdd")[0].reset();
@@ -279,7 +322,7 @@
 
                 //发送ajax去后台获取当前行数据
                 $.ajax({
-                    url: '/product/detail/',
+                    url: '/lead/detail/',
                     type: 'GET',
                     data: {uid: $(this).attr("uid")},
                     dataType: 'JSON',
@@ -291,16 +334,51 @@
 
 
                         //修改对话框的标题
-                        $("#myModalLabel").text("修改管理员信息");
+                        $("#myModalLabel").text("分配线索");
 
                         //点击编辑显示模态框
-                        $('#myModel').modal('show');
+                        $('#deliModel').modal('show');
                     }
                 })
 
                 //在对话框显示
 
             });
+        }
+
+        function bindBtnDeliSaveEvent() {
+            $("#DeliSave").click(function () {
+                //清除错误信息
+                $(".error-msg").empty();
+
+                doDeli();
+            });
+
+
+            function doDeli() {
+                  $.ajax({
+                url: '/lead/edit/?uid=' +EDIT_ID,
+                type: 'post',
+                data: $("#formDeli").serialize(),
+                dataType: 'JSON',
+                success: function (res) {
+                    if (res.status) {
+                        alert('分配成功');
+                        //清空表单
+                        $('#formDeli')[0].reset();
+                        //关闭对话框
+                        $('#deliModel').modal('hide');
+                        //刷新页面
+                        location.reload();
+
+                    } else {
+                        $.each(res.error, function (name, erroList) {
+                            $("#id_" + name).next().text(erroList[0]);
+                        })
+                    }
+                }
+            })
+        }
         }
 
     </script>

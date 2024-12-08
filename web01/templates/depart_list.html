@@ -27,7 +27,7 @@
                             <tbody>
                             {% for item in queryset %}
 
-                                <tr>
+                                <tr uid = {{ item.id }}>
 
                                     <th scope="row">{{ item.id }}</th>
                                     <td> {{ item.title }}</td>

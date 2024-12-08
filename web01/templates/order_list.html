@@ -27,21 +27,23 @@
                                 <th scope="col">创建时间</th>
                                 <th scope="col">更新时间</th>
                                 <th scope="col">客户</th>
+                                <th scope="col">负责人</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for item in queryset %}
 
-                                <tr>
+                                <tr uid = {{ item.id }}>
 
                                     <th scope="row">{{ item.oid }}</th>
                                     <td> {{ item.product }}</td>
                                     <td> {{ item.quantity }}</td>
                                     <td> {{ item.total_price }}</td>
-                                    <td> {{ item.status }}</td>
+                                    <td> {{ item.get_status_display }}</td>
                                     <td> {{ item.created_at }}</td>
                                     <td> {{ item.updated_at }}</td>
                                     <td> {{ item.customer }}</td>
+                                    <td> {{ item.admin}}</td>
 
 
                                     <td>

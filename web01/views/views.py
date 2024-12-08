@@ -97,3 +97,6 @@ def logout(request):
     """注销"""
     request.session.clear()
     return redirect('/login/')
+
+def about(request):
+    return render(request, 'about.html')

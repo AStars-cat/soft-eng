@@ -28,7 +28,7 @@
                             <tbody>
                             {% for item in queryset %}
 
-                                <tr>
+                                <tr uid = {{ item.id }}>
 
                                     <th scope="row">{{ item.id }}</th>
                                     <td> {{ item.name }}</td>
@@ -258,7 +258,7 @@
                             //关闭对话框
                             $('#deleteModal').modal('hide');
                             //删除页面中的数据
-                            $("tr[uid=" + DELETE_ID + "]").remove();
+                            $("tr[id=" + DELETE_ID + "]").remove();
                         } else {
                             alert('删除失败');
                         }

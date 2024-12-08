@@ -9,22 +9,23 @@
                 <div class="card" >
                     <div class="d-flex justify-content-between align-items-center" style="padding: 10px;">
                         <div style="width: 200px">
-                            <h2 class="mt-2 " style="margin-left: 10px;">产品列表</h2>
+                            <h2 class="mt-2 " style="margin-left: 10px;">跟进记录</h2>
                         </div>
 
                     </div>
 
                     <div class="card-body">
-                        <a href="#" id="btnAdd" class="btn btn-primary">添加产品</a>
                         <table class="table table-bordered mt-3">
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">产品名称</th>
-                                <th scope="col">数量</th>
-                                <th scope="col">描述</th>
-                                <th scope="col">价格</th>
+                                <th scope="col">跟进ID</th>
+                                <th scope="col">客户名称</th>
+                                <th scope="col">负责人</th>
+                                <th scope="col">跟进内容</th>
+                                <th scope="col">跟进时间</th>
                                 <th scope="col">操作</th>
+
+
                             </tr>
                             </thead>
                             <tbody>
@@ -33,14 +34,12 @@
                                 <tr uid = {{ item.id }}>
 
                                     <th scope="row">{{ item.id }}</th>
-                                    <td> {{ item.name }}</td>
-                                    <td> {{ item.count }}</td>
-                                    <td> {{ item.description }}</td>
-                                    <td> {{ item.price }}</td>
-
+                                    <td> {{ item.customer }}</td>
+                                    <td> {{ item.employee }}</td>
+                                    <td> {{ item.notes }}</td>
+                                    <td> {{ item.created_at}}</td>
 
                                     <td>
-                                        <input uid = "{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit" href="" value="编辑">
                                         <input uid = "{{ item.id }}" type="button" class="btn btn-danger btn-xs btn-delete" href="" value="删除">
 
 
@@ -68,7 +67,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">添加产品</h5>
+                            <h5 class="modal-title" id="myModalLabel">添加订单</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -172,7 +171,7 @@
 
         function doAdd() {
             $.ajax({
-                url: '/product/add/',
+                url: '/order/add/',
                 type: 'post',
                 data: $("#formAdd").serialize(),
                 dataType: 'JSON',
@@ -197,7 +196,7 @@
 
         function doEdit(){
                  $.ajax({
-                    url: '/product/edit/?uid=' + EDIT_ID,
+                    url: '/order/edit/?uid=' + EDIT_ID,
                     type: 'post',
                     data: $("#formAdd").serialize(),
                     dataType: 'JSON',
@@ -251,7 +250,7 @@
                 console.log("测试")
                 //点击确认删除按钮后，提交删除请求
                 $.ajax({
-                    url: '/product/delete/',
+                    url: '/order/delete/',
                     type: 'GET',
                     data: {uid: DELETE_ID},
                     dataType: 'JSON',
@@ -279,11 +278,12 @@
 
                 //发送ajax去后台获取当前行数据
                 $.ajax({
-                    url: '/product/detail/',
+                    url: '/order/detail/',
                     type: 'GET',
                     data: {uid: $(this).attr("uid")},
                     dataType: 'JSON',
                     success: function (data) {
+
                         //将数据赋值到标签
                         $.each(data.data, function (name, value) {
                             $("#id_" + name).val(value);

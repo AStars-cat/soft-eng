@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block css %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h1>CRM用户关系管理系统使用手册</h1>
+            </div>
+            <div class="card-body">
+                <h2 class="text-primary">主页看板</h2>
+                <p>主页看板提供系统的概览和快捷入口。</p>
+
+                <h2 class="text-primary">基础信息</h2>
+                <ul>
+                    <li><h3 class="text-secondary">部门信息</h3>
+                        <p>管理公司内部的部门信息，包括新增、修改和删除部门。</p>
+                    </li>
+                    <li><h3 class="text-secondary">员工信息</h3>
+                        <p>管理公司员工的信息，包括新增、修改和删除员工。</p>
+                    </li>
+                    <li>
+                        <h3 class="text-secondary">产品信息</h3>
+                        <ul>
+                            <li>管理当前系统产品信息，包括新增、修改功能。</li>
+                            <li>新增产品信息：用户可以添加新的产品信息，包括产品名称、描述、价格等。</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2 class="text-primary">线索管理</h2>
+                <ul>
+                    <li>
+                        <h3 class="text-secondary">线索列表（全部、待分配）</h3>
+                        <ul>
+                            <li>管理线索信息：查看和管理所有的销售线索。</li>
+                            <li>新增线索信息：添加新的销售线索，记录潜在客户的信息。</li>
+                            <li>分配线索给指定销售人员：将线索分配给特定的销售人员进行跟进。</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2 class="text-primary">日程表</h2>
+                <p>管理和查看日程安排，用户可以添加、修改和删除日程事件，确保重要事项不会被遗漏。</p>
+
+                <h2 class="text-primary">跟进客户</h2>
+                <ul>
+                    <li>
+                        <h3 class="text-secondary">我的客户</h3>
+                        <ul>
+                            <li>查看分配给自己的线索：查看分配给自己的客户线索，进行跟进、修改或放弃客户（流入公海池）。</li>
+                            <li>新增客户：添加新的客户信息，记录客户的详细资料。</li>
+                            <li>客户详情：查看客户的详细信息，包括联系记录、购买历史等。</li>
+                            <li>公海池客户（领取）：从公海池中领取客户进行跟进。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 class="text-secondary">我的订单</h3>
+                        <ul>
+                            <li>管理当前用户的订单消息：查看和管理自己的订单信息，可以新增、修改和删除订单。</li>
+                            <li>新增订单：添加新的订单信息，记录订单的详细内容。</li>
+                            <li>申请售后：如果订单出现问题，可以申请售后服务。</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2 class="text-primary">销售管理</h2>
+                <ul>
+                    <li>公海池：查看和管理公海池中的客户线索。</li>
+                    <li>公司列表：查看和管理公司信息。</li>
+                    <li>客户列表：查看和管理所有客户的信息。</li>
+                    <li>
+                        <h3 class="text-secondary">订单列表</h3>
+                        <ul>
+                            <li>查看所有的订单：查看系统中所有的订单信息。</li>
+                            <li>新增订单：添加新的订单信息。</li>
+                            <li>审核订单：审核订单的详细信息，确保订单的准确性。</li>
+                        </ul>
+                    </li>
+                    <li>跟进记录：记录和查看销售人员的跟进记录，确保每个客户都得到及时的跟进。</li>
+                </ul>
+
+                <h2 class="text-primary">财务管理</h2>
+                <ul>
+                    <li>
+                        <h3 class="text-secondary">订单应收</h3>
+                        <ul>
+                            <li>订单审核通过后，生成订单应收，可以进行收款、冻结操作。</li>
+                            <li>收款：记录订单的收款信息，确保财务数据的准确性。</li>
+                            <li>冻结操作：在必要时冻结订单，防止进一步的操作。</li>
+                        </ul>
+                    </li>
+                    <li>订单退款：处理订单的退款申请，确保客户的退款请求得到及时处理。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

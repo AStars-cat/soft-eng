@@ -7,6 +7,13 @@
 
     <link rel="stylesheet" href="{% static 'plugins/bootstrap-5.3.0/css/bootstrap.css' %}">
     <link rel="icon" href="{% static 'img/icon.svg' %}">
+
+    <style>
+        {% block css %}
+
+        {% endblock %}
+    </style>
+
 </head>
 <body>
 
@@ -15,7 +22,7 @@
     <div class="container">
         <img src="{% static 'img/person-circle.svg' %}" width="30" height="30" class="d-inline-block align-top me-2"
              alt="">
-        <a class="navbar-brand" href="#">CRM系统</a>
+        <a class="navbar-brand" href="">CRM系统</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,7 +34,7 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            基础信息
+                            📒基础信息
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/depart/list/">部门信息</a></li>
@@ -39,19 +46,18 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">线索管理</a>
+                    <a class="nav-link" href="/lead/list/">🧩线索管理</a>
                 </li>
 
                 <li class="nav-item">
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            跟进客户
+                            👤跟进客户
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">我的客户</a></li>
-                            <li><a class="dropdown-item" href="#">我的订单</a></li>
-                            <li><a class="dropdown-item" href="#">跟进记录</a></li>
+                            <li><a class="dropdown-item" href="/my/customer/">我的客户</a></li>
+                            <li><a class="dropdown-item" href="/follow/list/">跟进记录</a></li>
 
 
                         </ul>
@@ -62,10 +68,10 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            销售管理
+                            💡销售管理
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">公司列表</a></li>
+                            <li><a class="dropdown-item" href="/company/list/">公司列表</a></li>
                             <li><a class="dropdown-item" href="/customer/list/">客户列表</a></li>
                             <li><a class="dropdown-item" href="/order/list/">订单列表</a></li>
 
@@ -78,19 +84,19 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            财务管理
+                            🧾财务管理
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">订单应收</a></li>
-                            <li><a class="dropdown-item" href="#">订单退款</a></li>
+                            <li><a class="dropdown-item" href="/order/receivable/">订单应收</a></li>
+                            {#                            <li><a class="dropdown-item" href="#">订单退款</a></li>#}
 
                         </ul>
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">日程</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">日程</a>#}
+{#                </li>#}
 
             </ul>
 
@@ -101,8 +107,7 @@
                     {{ request.session.info.name }}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">个人资料</a></li>
-                    <li><a class="dropdown-item" href="#">关于</a></li>
+                    <li><a class="dropdown-item" href="/about/">关于</a></li>
                     <li><a class="dropdown-item" href="/admins/list/">管理员</a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -117,9 +122,9 @@
 
 
 
-        {% block content %}
+{% block content %}
 
-        {% endblock %}
+{% endblock %}
 
 <script src="{% static '/plugins/jquery/jquery-3.7.1.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-5.3.0/js/bootstrap.bundle.js' %}"></script>

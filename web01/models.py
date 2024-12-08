@@ -6,7 +6,12 @@ from django.db.models import SmallIntegerField
 
 # Create your models here.
 
+class Department(models.Model):
+    """部门表"""
+    title = models.CharField(max_length=100,verbose_name='部门')
 
+    def __str__(self):
+        return self.title
 
 
 class Admin(models.Model):
@@ -14,15 +19,20 @@ class Admin(models.Model):
     name = models.CharField(max_length=32, verbose_name='管理员姓名')
     password = models.CharField(max_length=64, verbose_name='密码')
 
+    gender_choices = (
+        (1, '男'),
+        (2, '女'),
+    )
+    gender = SmallIntegerField(choices=gender_choices, verbose_name='性别', default=1)
+    email = models.EmailField(verbose_name='邮箱', blank=True, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name='部门')
+
+
+
     def __str__(self):
         return self.name
 
-class Department(models.Model):
-    """部门表"""
-    title = models.CharField(max_length=100,verbose_name='部门')
 
-    def __str__(self):
-        return self.title
 
 
 class Employee(models.Model):
@@ -66,6 +76,15 @@ class Customer(models.Model):
     gender = models.SmallIntegerField(verbose_name='性别',choices=gender_choices,default=0)
     company =  models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name='公司',default=1)
     assigned_to = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True,verbose_name='负责人')
+    phone = models.CharField(max_length=20,verbose_name='电话',blank=True, null=True)
+    email = models.EmailField(verbose_name='邮箱',blank=True, null=True)
+    status_choice  = (
+        (0, '未分配'),
+        (1, '已分配'),
+    )
+    status = models.SmallIntegerField(choices=status_choice,verbose_name='状态',default=0)
+    created_at = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
+
 
     def __str__(self):
         return self.name
@@ -80,7 +99,14 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name='产品')
     quantity = models.PositiveIntegerField(verbose_name='数量')
     total_price = models.DecimalField(max_digits=10, decimal_places=2,verbose_name='总价')
-    status = models.CharField(max_length=50,verbose_name='状态')
+    paid = models.DecimalField(max_digits=10, decimal_places=2,verbose_name='已付金额',default=0)
+
+    status_choices = (
+        (0, '已完成'),
+        (1, '未完成'),
+    )
+
+    status = models.SmallIntegerField(choices=status_choices,verbose_name='状态',default=1)
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     updated_at = models.DateTimeField(auto_now=True,verbose_name='更新时间')
     admin = models.ForeignKey(Admin, on_delete=models.CASCADE,verbose_name='管理员',default=3)
@@ -91,7 +117,7 @@ class Order(models.Model):
 
 class FollowUpRecord(models.Model):
     """跟进记录"""
-    lead = models.ForeignKey(Lead, on_delete=models.CASCADE,verbose_name='线索')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,verbose_name='客户')
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE,verbose_name='负责人')
     notes = models.TextField(verbose_name='备注')
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
@@ -112,8 +138,8 @@ class Company(models.Model):
     name = models.CharField(max_length=100,verbose_name='公司名称')
     address = models.CharField(max_length=255,verbose_name='地址')
     phone = models.CharField(max_length=20,verbose_name='电话')
-    email = models.EmailField(verbose_name='邮箱')
-    website = models.URLField(blank=True, null=True,verbose_name='网站')
+    email = models.EmailField(verbose_name='邮箱',blank=True, null=True)
+    website = models.URLField(blank=True, null=True,verbose_name='网站',)
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     updated_at = models.DateTimeField(auto_now=True,verbose_name='更新时间')
 

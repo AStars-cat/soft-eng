@@ -1,4 +1,5 @@
 from lib2to3.fixes.fix_input import context
+from venv import create
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
@@ -179,7 +180,7 @@ def admin_delete(request):
 
 class EmployeeModelForm(forms.ModelForm):
     class Meta:
-        model = models.Employee
+        model = models.Admin
         fields = "__all__"
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -191,7 +192,7 @@ class EmployeeModelForm(forms.ModelForm):
 
 def employee_list(request):
     # 员工列表
-    queryset = models.Employee.objects.all().order_by('id')
+    queryset = models.Admin.objects.all().order_by('id')
     form = EmployeeModelForm()
     page_obj = Pagination(request, queryset)
 
@@ -219,7 +220,7 @@ def employee_edit(request):
         """编辑"""
         uid = request.GET.get('uid')
         print("接受到的uid", uid)
-        row_obj = models.Employee.objects.filter(id=uid).first()
+        row_obj = models.Admin.objects.filter(id=uid).first()
         if not row_obj:
             return JsonResponse({'status': False, 'tips': '数据不存在'})
         form = EmployeeModelForm(instance=row_obj, data=request.POST)
@@ -235,7 +236,7 @@ def employee_edit(request):
 def employee_detail(request):
     """员工详情"""
     uid = request.GET.get('uid')
-    obj_dict = models.Employee.objects.filter(id=uid).values("name", "department").first()
+    obj_dict = models.Admin.objects.filter(id=uid).values("name", "department").first()
 
     return JsonResponse({'status': True, 'data': obj_dict})
 
@@ -244,7 +245,7 @@ def employee_detail(request):
 def employee_delete(request):
     """删除员工"""
     uid = request.GET.get('uid')
-    models.Employee.objects.filter(id=uid).delete()
+    models.Admin.objects.filter(id=uid).delete()
     return JsonResponse({'status': True})
 
 
@@ -327,4 +328,80 @@ def product_delete(request):
     models.Product.objects.filter(id=uid).delete()
     return JsonResponse({'status': True})
 
+
+
+###########################公司管理###########################
+
+class CompanyModelForm(forms.ModelForm):
+    class Meta:
+        model = models.Company
+        fields = "__all__"
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'website': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'created_at': forms.DateTimeInput(attrs={'class': 'form-control'}),
+            'updated_at': forms.DateTimeInput(attrs={'class': 'form-control'}),
+            'id': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+
+def company_list(request):
+    # 公司列表
+    queryset = models.Company.objects.all().order_by('id')
+    form = CompanyModelForm()
+    page_obj = Pagination(request, queryset)
+
+    context = {
+        'form': form,
+        'queryset': page_obj.page_queryset,
+        'page_string': page_obj.html(),
+    }
+
+    return render(request, 'company_list.html', context)
+
+
+@csrf_exempt
+def company_add(request):
+    # 添加公司
+    form = CompanyModelForm(data=request.POST)
+    if form.is_valid():
+        form.save()
+        return JsonResponse({'status': True})
+    return JsonResponse({'status': False, 'error': form.errors})
+
+
+@csrf_exempt
+def company_edit(request):
+    """编辑"""
+    uid = request.GET.get('uid')
+    print("接受到的uid", uid)
+    row_obj = models.Company.objects.filter(id=uid).first()
+    if not row_obj:
+        return JsonResponse({'status': False, 'tips': '数据不存在'})
+    form = CompanyModelForm(instance=row_obj, data=request.POST)
+
+    print("有数据")
+    if form.is_valid():
+        form.save()
+        return JsonResponse({'status': True})
+    return JsonResponse({'status': False, 'error': form.errors})
+
+
+@csrf_exempt
+def company_detail(request):
+    """公司详情"""
+    uid = request.GET.get('uid')
+    obj_dict = models.Company.objects.filter(id=uid).values("name", "address").first()
+    return JsonResponse({'status': True, 'data': obj_dict})
+
+
+@csrf_exempt
+def company_delete(request):
+    """删除公司"""
+    uid = request.GET.get('uid')
+    models.Company.objects.filter(id=uid).delete()
+    return JsonResponse({'status': True})
 

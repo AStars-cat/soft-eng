@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from web01.views import views,bas,cus,sale
+from web01.views import views,bas,cus,sale,leads
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +26,8 @@ urlpatterns = [
     path('main', views.main),
 
     path('', bas.depart_list),
+
+    path('about/', views.about),
 
 
 
@@ -90,6 +92,43 @@ urlpatterns = [
     path('order/detail/', sale.order_detail),
 
 
+    #公司管理
+    path('company/list/', bas.company_list),
+    path('company/add/', bas.company_add),
+    path('company/edit/', bas.company_edit),
+    path('company/delete/', bas.company_delete),
+    path('company/detail/', bas.company_detail),
 
+
+    #财务管理
+    #订单应收
+    path('order/receivable/', sale.order_receivable_list),
+    path('order/payment/', sale.order_receivable),
+    path('order/rec/detail/', sale.ord_rec_detail),
+
+
+    #线索管理
+    path('lead/list/', leads.lead_list),
+    path('lead/add/', leads.lead_add),
+    path('lead/edit/', leads.lead_edit),
+    path('lead/delete/', leads.lead_delete),
+    path('lead/detail/', leads.lead_detail),
+
+
+    #我的客户
+    path('my/customer/', cus.my_customer_list),
+    path('my/customer/add/', cus.my_customer_add),
+    path('my/customer/edit/', cus.my_customer_edit),
+    path('my/customer/delete/', cus.my_customer_delete),
+
+    path('my/customer/detail/', cus.my_customer_detail),
+
+
+    #跟进记录
+    path('follow/list/', cus.follow_list),
+    path('follow/add/', cus.follow_add),
+    # path('follow/edit/', cus.follow_edit),
+    path('follow/delete/', cus.follow_delete),
+    # path('follow/detail/', cus.follow_detail),
 
 ]

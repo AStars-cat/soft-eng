@@ -6,42 +6,43 @@
         <div class="container mt-5">
 
             <div>
-                <div class="card" >
+                <div class="card">
                     <div class="d-flex justify-content-between align-items-center" style="padding: 10px;">
                         <div style="width: 200px">
-                            <h2 class="mt-2 " style="margin-left: 10px;">产品列表</h2>
+                            <h2 class="mt-2 " style="margin-left: 10px;">订单应收</h2>
                         </div>
 
                     </div>
 
                     <div class="card-body">
-                        <a href="#" id="btnAdd" class="btn btn-primary">添加产品</a>
                         <table class="table table-bordered mt-3">
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">产品名称</th>
+                                <th scope="col">订单号</th>
+                                <th scope="col">商品名</th>
                                 <th scope="col">数量</th>
-                                <th scope="col">描述</th>
-                                <th scope="col">价格</th>
+                                <th scope="col">应收</th>
+                                <th scope="col">已收</th>
                                 <th scope="col">操作</th>
+
                             </tr>
                             </thead>
                             <tbody>
                             {% for item in queryset %}
 
-                                <tr uid = {{ item.id }}>
+                                <tr>
 
-                                    <th scope="row">{{ item.id }}</th>
-                                    <td> {{ item.name }}</td>
-                                    <td> {{ item.count }}</td>
-                                    <td> {{ item.description }}</td>
-                                    <td> {{ item.price }}</td>
+                                    <th scope="row">{{ item.oid }}</th>
+                                    <td> {{ item.product }}</td>
+                                    <td> {{ item.quantity }}</td>
+                                    <td> {{ item.total_price }}</td>
+                                    <td> {{ item.paid }}</td>
 
 
                                     <td>
-                                        <input uid = "{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit" href="" value="编辑">
-                                        <input uid = "{{ item.id }}" type="button" class="btn btn-danger btn-xs btn-delete" href="" value="删除">
+                                        <input uid="{{ item.id }}" type="button" class="btn btn-primary btn-xs btn-edit"
+                                               href="" value="💵收款">
+
 
 
                                     </td>
@@ -63,28 +64,34 @@
             </div>
 
 
-            {#            模态框#}
+            {#模态框#}
             <div class="modal fade" id="myModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">添加产品</h5>
+                            <h5 class="modal-title" id="myModalLabel">收款</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
 
                             <form id="formAdd">
                                 <div class="row">
-                                    {% for field in form %}
+                                    {% for field in form_p %}
                                         <div class="col-xs-6 col-md-6">
                                             <div class="form-group " style="position: relative">
                                                 <label>{{ field.label }}:</label>
                                                 {{ field }}
                                                 <span class="error-msg"
                                                       style="color: red;position: absolute">{{ field.errors.0 }}</span>
+
+
                                             </div>
                                         </div>
                                     {% endfor %}
+                                    <label>
+                                        收款金额
+                                        <input type="text" name="new_paid" class="form-control " >
+                                    </label>
                                 </div>
                             </form>
                         </div>
@@ -97,7 +104,8 @@
             </div>
         </div>
 
-    </div>
+
+
 
 
 
@@ -172,7 +180,7 @@
 
         function doAdd() {
             $.ajax({
-                url: '/product/add/',
+                url: '/company/add/',
                 type: 'post',
                 data: $("#formAdd").serialize(),
                 dataType: 'JSON',
@@ -195,44 +203,44 @@
             })
         }
 
-        function doEdit(){
-                 $.ajax({
-                    url: '/product/edit/?uid=' + EDIT_ID,
-                    type: 'post',
-                    data: $("#formAdd").serialize(),
-                    dataType: 'JSON',
-                    success: function (data) {
-                        if (data.status) {
-                            alert('提交成功');
-                            //清空表单
-                            //$("#formAdd")是jQuery对象， -> $("#formAdd")[0]是原生DOM对象
-                            $("#formAdd")[0].reset();
-                            //关闭对话框
-                            $('#myModal').modal('hide');
-                            //刷新页面
-                            location.reload();
+        function doEdit() {
+            $.ajax({
+                url: '/order/payment/?uid=' + EDIT_ID,
+                type: 'post',
+                data: $("#formAdd").serialize(),
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status) {
+                        alert('提交成功');
+                        //清空表单
+                        //$("#formAdd")是jQuery对象， -> $("#formAdd")[0]是原生DOM对象
+                        $("#formAdd")[0].reset();
+                        //关闭对话框
+                        $('#myModal').modal('hide');
+                        //刷新页面
+                        location.reload();
 
-                        } else {
-                            if(data.tips){
-                                alert(data.tips);
-                            }
-                            //显示错误信息
-                            $.each(data.error, function (name, erroList) {
-                                $("#id_" + name).next().html(erroList[0]);
-                            })
+                    } else {
+                        if (data.tips) {
+                            alert(data.tips);
                         }
-
-                        console.log(data);
-
-                        {#//提交成功后，关闭对话框#}
-                        {#$('#myModal').modal('hide');#}
-                        {#//刷新页面#}
-                        {#location.reload();#}
+                        //显示错误信息
+                        $.each(data.error, function (name, erroList) {
+                            $("#id_" + name).next().html(erroList[0]);
+                        })
                     }
-                })
+
+                    console.log(data);
+
+                    {#//提交成功后，关闭对话框#}
+                    {#$('#myModal').modal('hide');#}
+                    {#//刷新页面#}
+                    {#location.reload();#}
+                }
+            })
         }
 
-            function bindBtnDeleteEvent() {
+        function bindBtnDeleteEvent() {
             //给删除按钮绑定事件
             $(".btn-delete").click(function () {
                 //显示删除对话框
@@ -251,7 +259,7 @@
                 console.log("测试")
                 //点击确认删除按钮后，提交删除请求
                 $.ajax({
-                    url: '/product/delete/',
+                    url: '/company/delete/',
                     type: 'GET',
                     data: {uid: DELETE_ID},
                     dataType: 'JSON',
@@ -270,7 +278,7 @@
             });
         }
 
-         function bindBtnEditEvent() {
+        function bindBtnEditEvent() {
             $(".btn-edit").click(function () {
                 //清空表单
                 $("#formAdd")[0].reset();
@@ -279,7 +287,7 @@
 
                 //发送ajax去后台获取当前行数据
                 $.ajax({
-                    url: '/product/detail/',
+                    url: '/order/rec/detail/',
                     type: 'GET',
                     data: {uid: $(this).attr("uid")},
                     dataType: 'JSON',
@@ -291,7 +299,7 @@
 
 
                         //修改对话框的标题
-                        $("#myModalLabel").text("修改管理员信息");
+                        $("#myModalLabel").text("收款信息");
 
                         //点击编辑显示模态框
                         $('#myModel').modal('show');
