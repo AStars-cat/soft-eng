@@ -3,6 +3,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
 
 
+
 def check_code(width=120, height=30, char_length=5, font_file=None, font_size=28):
     code = []
     img = Image.new(mode='RGB', size=(width, height), color=(255, 255, 255))
@@ -22,9 +23,9 @@ def check_code(width=120, height=30, char_length=5, font_file=None, font_size=28
         """
         return (random.randint(0, 255), random.randint(10, 255), random.randint(64, 255))
 
-    # 使用系统自带的字体文件
+
     if font_file is None:
-        font_file = "C:/Windows/Fonts/arial.ttf"  # Windows系统字体路径
+        font_file = "web01/static/font/arial.ttf"
 
     font = ImageFont.truetype(font_file, font_size)
 
